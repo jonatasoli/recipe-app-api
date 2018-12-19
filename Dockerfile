@@ -3,12 +3,15 @@ MAINTAINER Jonatas Oliveira
 
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir /app
-COPY . /app
-WORKDIR /app
-
+COPY ./Pipfile /Pipfile
+COPY ./Pipfile.lock /Pipfile.lock
 RUN pip install pipenv && \
     pipenv install --system
+
+RUN mkdir /app
+WORKDIR /app
+COPY ./app /app
+
 
 RUN adduser -D user
 USER user
